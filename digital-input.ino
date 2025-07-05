@@ -8,8 +8,8 @@ int pinServo = 2;
 
 void setup() {
   // Entradas digitales
-  pinMode(pulsadorCeroGrados, INPUT_PULLDOWN);
-  pinMode(pulsadorCientochentaGrados, INPUT_PULLDOWN);
+  pinMode(pulsadorCeroGrados, INPUT_PULLUP);
+  pinMode(pulsadorCientochentaGrados, INPUT_PULLUP);
 
   // Configurando Servo
   myservo.attach(pinServo);
@@ -17,6 +17,12 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Configurando ángulos
+  if (digitalRead(pulsadorCeroGrados) == LOW){
+    myservo.write(0);
+  }
 
+  if (digitalRead(pulsadorCientochentaGrados) == LOW){
+    myservo.write(180);
+  }
 }
