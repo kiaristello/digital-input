@@ -1,10 +1,19 @@
+#include <Servo.h>
+Servo myservo;
+
+
 int pulsadorCeroGrados = 7; 
 int pulsadorCientochentaGrados = 6;
-int servo = 2;
+int pinServo = 2;
 
 void setup() {
-  // put your setup code here, to run once:
+  // Entradas digitales
+  pinMode(pulsadorCeroGrados, INPUT_PULLDOWN);
+  pinMode(pulsadorCientochentaGrados, INPUT_PULLDOWN);
 
+  // Configurando Servo
+  myservo.attach(pinServo);
+  myservo.write(90);// move servos to center position -> 90°
 }
 
 void loop() {
