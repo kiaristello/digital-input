@@ -11,7 +11,7 @@ void setup() {
   // Entradas digitales
   pinMode(pulsadorCeroGrados, INPUT_PULLUP);
   pinMode(pulsadorCientochentaGrados, INPUT_PULLUP);
-  pinMode(pinled,OUTPUT);
+  pinMode(pinLed, OUTPUT);
 
 
   // Configurando Servo
@@ -20,13 +20,14 @@ void setup() {
 }
 
 void loop() {
-  // Configurando ángulos
+  // Configurando ángulos y leds
   if (digitalRead(pulsadorCeroGrados) == LOW){
     myservo.write(0);
-    
+    digitalWrite(pinLed, HIGH);
   }
 
   if (digitalRead(pulsadorCientochentaGrados) == LOW){
     myservo.write(180);
+    digitalWrite(pinLed, LOW);
   }
 }
