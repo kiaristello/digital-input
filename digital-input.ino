@@ -1,11 +1,11 @@
 #include <Servo.h>
 Servo myservo;
 
-
 int pulsadorCeroGrados = 7; 
 int pulsadorCientochentaGrados = 6;
 int pinServo = 2;
 int pinLed = 4;
+boolean encendido = false;
 
 void setup() {
   Serial.begin(9600);
@@ -22,16 +22,28 @@ void setup() {
 }
 
 void loop() {
-  // Configurando ángulos y leds
-  if (digitalRead(pulsadorCeroGrados) == LOW){
-    Serial.println("Mi Servo se esta moviendo a 0°");
-    myservo.write(0);
-    digitalWrite(pinLed, HIGH);
+  if (encendido == "false"){
+    Serial.println("Introducir palabra secreta");
+    while (Serial.available() == 0);
+    String comando = Serial.readString();
+    if (comando == 'encender'){
+      encendido = true;
+    }else{
+      Serial.println("NO ERES TU 👀");
+    }
+  } else {
+    // Configurando ángulos y leds
+    if (digitalRead(pulsadorCeroGrados) == LOW){
+      Serial.println("Mi Servo se esta moviendo a 0°");
+      myservo.write(0);
+      digitalWrite(pinLed, HIGH);
+    }
+
+    if (digitalRead(pulsadorCientochentaGrados) == LOW){
+      Serial.println("Mi Servo se esta moviendo a 180°");
+      myservo.write(180);
+      digitalWrite(pinLed, LOW);
+    }
   }
 
-  if (digitalRead(pulsadorCientochentaGrados) == LOW){
-    Serial.println("Mi Servo se esta moviendo a 180°");
-    myservo.write(180);
-    digitalWrite(pinLed, LOW);
-  }
 }
